@@ -2,8 +2,11 @@
     <div class="col-md-12 text-center">
         <h1>Classement Général</h1>
         
-        <a class="filter" href="<?= $this->url('classement/men') ?>">Classement Hommes</a>
-        <a class="filter" href="<?= $this->url('classement/women') ?>">Classement Femmes</a>
+        <a class="filter" href="<?= $this->url('classement/men') ?>">
+            <button type="button" class="btn btn-primary">Classement Hommes</button>
+        </a>
+        <a class="filter" href="<?= $this->url('classement/women') ?>">
+            <button type="button" class="btn btn-primary">Classement Femmes</button>
     <div class="table-responsive mt-20">
         <table class="table">
             <thead>

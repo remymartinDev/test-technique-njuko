@@ -73,6 +73,7 @@ class ParticipantForm extends Form
             'type'    => 'Text',
             'options' => [
                 'label' => 'Temps de passage',
+                'maxlength' => 20,
             ],
         ]);
 
