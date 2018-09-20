@@ -23,6 +23,12 @@ class Participant
     /** @ORM\Column(type="string") */
     protected $sex;
 
+    /** @ORM\Column(type="integer", nullable=true) */
+    protected $bibNumber;
+
+    /** @ORM\Column(type="string", columnDefinition="INT(8) UNSIGNED ZEROFILL", nullable=true) */
+    protected $time;
+
     /**
      * @ORM\ManyToOne(targetEntity="Application\Entity\Event")
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
@@ -93,6 +99,38 @@ class Participant
     public function setSex($sex)
     {
         $this->sex = $sex;
+    }
+
+     /**
+     * @return mixed
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param mixed $time
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBibNumber()
+    {
+        return $this->bibNumber;
+    }
+
+    /**
+     * @param mixed $bibNumber
+     */
+    public function setBibNumber($bibNumber)
+    {
+        $this->bibNumber = $bibNumber;
     }
 
     /**

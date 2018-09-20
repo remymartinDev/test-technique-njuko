@@ -1,8 +1,9 @@
 <div class="row">
     <div class="col-md-12 text-center">
-        <h1>Classement Général</h1>
+        <h1>Classement Hommes</h1>
         
-        <a class="filter" href="<?= $this->url('classement/men') ?>">Classement Hommes</a>
+
+        <a class="filter" href="<?= $this->url('classement') ?>">Classement Général</a>
         <a class="filter" href="<?= $this->url('classement/women') ?>">Classement Femmes</a>
     <div class="table-responsive mt-20">
         <table class="table">
@@ -17,12 +18,13 @@
             <tbody>
 
                     <?php
-                    foreach($all as $participant){ ?>
+                    foreach($men as $participant){ ?>
                         <tr>
                             <td><?=$participant->getBibNumber()?></td>
                             <td><?=$participant->getFirstname()?></td>
                             <td><?=$participant->getLastname()?></td>
                             <td><?= substr($participant->getTime(), 0, 2).'h'.substr($participant->getTime(), 2, 2).'m'.substr($participant->getTime(), 4, 2).'s'.substr($participant->getTime(), 6, 2)?></td>
+                            
                         </tr>
                     <?php } ?>                 
             </tbody>

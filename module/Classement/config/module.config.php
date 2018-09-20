@@ -2,15 +2,16 @@
 
 namespace Classement;
 
+use Classement\Controller\ClassementControllerFactory;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\ServiceManager\Factory\InvokableFactory; 
 
 return [
     'router' => [
         'routes' => [
             'classement' => [
-                'type' => Segment::class,
+                'type' => Literal::class,
                 'options' => [
                     'route'    => '/classement',
                     'defaults' => [
@@ -18,12 +19,39 @@ return [
                         'action'     => 'index',
                     ],
                 ],
-            ]
+                'may_terminate' => true,
+                'child_routes'  => array(
+                    'men'   =>  array(
+                        'type'    => Segment::class,
+                        'options'   =>  array(
+                            'route' =>  '/men',
+                            'defaults'  =>  array(
+                                'controller' => Controller\ClassementController::class,
+                                'action'    =>  'men'
+                            )
+                        )
+                    ),
+                    'women'   =>  array(
+                        'type'    => Segment::class,
+                        'options'   =>  array(
+                            'route' =>  '/women',
+                            'defaults'  =>  array(
+                                'controller' => Controller\ClassementController::class,
+                                'action'    =>  'women'
+                            )
+                        )
+                    ), 
+                ),
+
+
+
+                
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
-            Controller\ClassementController::class => InvokableFactory::class,
+            Controller\ClassementController::class => ClassementControllerFactory::class
         ],
     ],
     'view_manager' => [

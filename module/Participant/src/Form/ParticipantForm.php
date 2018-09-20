@@ -15,7 +15,10 @@ class ParticipantForm extends Form
 
         $this->add([
             'name' => 'id',
-            'type' => 'Hidden',
+            'type' => 'Text',
+            'options' => [
+                'label' => 'Dossard n°',
+            ],
         ]);
 
         $this->add([
@@ -50,6 +53,26 @@ class ParticipantForm extends Form
                         'label'      => 'Femme',
                     ]
                 ]
+            ],
+        ]);
+
+        $this->add([
+            'name'    => 'event',
+            'type'    => 'Select',
+            'options' => array(
+                'label' => 'Evènement',
+                'value_options' => array(
+                        '1' => 'Course de 12 km',
+                        '2' => 'Semi Marathon',
+                ),
+        )
+        ]);
+
+        $this->add([
+            'name'    => 'time',
+            'type'    => 'Text',
+            'options' => [
+                'label' => 'Temps de passage',
             ],
         ]);
 

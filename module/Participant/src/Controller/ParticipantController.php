@@ -70,10 +70,10 @@ class ParticipantController extends AbstractActionController
 
             $participant = $form->getData();
 
-            /** TODO Modification Evenement (forcer pour le moment) */
+            /** TODO Modification Evenement (forcer pour le moment) -> DONE */
             /** @var \Application\Entity\Event $event */
-            $event = $this->entityManager->getRepository('Application\Entity\Event')->find(1);
-            $participant->setEvent($event);
+            /* $event = $this->entityManager->getRepository('Application\Entity\Event')->find(1);
+            $participant->setEvent($event); */
 
             $this->entityManager->persist($participant);
             $this->entityManager->flush();
@@ -87,13 +87,58 @@ class ParticipantController extends AbstractActionController
 
     public function generateBibNumbersAction(){
 
-        return $this->redirect()->toRoute('participant/list');
+        //find every user
+        $users = $this->entityManager->getRepository('Application\Entity\Participant')->findAll();
 
+        //defining Bib Number 1st iteration
+        $i=1;
+
+        foreach ($users as $eventMember){           
+            //in case more than 100 event participants
+            if ($i>100){
+                break;
+            }
+            //setting Bib for this participant
+            else{
+            $eventMember->setBibNumber($i);
+            $this->entityManager->persist($eventMember);
+            //increment for next iteration
+            $i++;
+            }
+        }
+
+        $this->entityManager->flush();
+        return $this->redirect()->toRoute('participant/list');
     }
 
     public function deleteAction(){
 
+        //defining "id"
+        $id = (int) $this->params()->fromRoute('id', 0);
+        //defining "user"
+        $user = $this->entityManager->getRepository('Application\Entity\Participant')->find($id);
+
+        //deleting
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+
         return $this->redirect()->toRoute('participant/list');
 
+    }
+
+    //method generating random time for each participant
+    public function generateRandomTimeAction(){
+        
+        $users = $this->entityManager->getRepository('Application\Entity\Participant')->findAll();
+
+        foreach ($users as $runner){
+            $time = mt_rand(0, 4).mt_rand(11, 60).mt_rand(11, 60).mt_rand(11, 99);
+            $runner->setTime($time);
+            $this->entityManager->persist($runner);
+            }
+
+        $this->entityManager->flush();
+        
+        return $this->redirect()->toRoute('participant/list');
     }
 }

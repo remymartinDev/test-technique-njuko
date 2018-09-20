@@ -60,7 +60,21 @@ return [
                             )
                         )
                     ),
+                    'generate-random-time'   =>  array(
+                        'type'    => Segment::class,
+                        'options'   =>  array(
+                            'route' =>  '/generate-random-time',
+                            'defaults'  =>  array(
+                                'controller' => Controller\ParticipantController::class,
+                                'action'    =>  'generate-random-time'
+                            )
+                        )
+                    ),
                 ),
+
+
+
+                
             ],
         ],
     ],
